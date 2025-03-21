@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class Validator(ABC):
-    def __set_name__(self, owner: BurgerRecipe, name: BurgerRecipe) -> None:
+    def __set_name__(self, owner: BurgerRecipe, name: str) -> None:
         self.protected_name = "_" + name
 
     def __get__(self, obj: BurgerRecipe, objtype: BurgerRecipe = None) -> str:
@@ -24,7 +24,7 @@ class Number(Validator):
         self.min_value = min_value
 
     def validate(self, value: int) -> int:
-        if not isinstance(value, int) and not isinstance(value, int):
+        if not isinstance(value, int):
             raise TypeError("Quantity should be integer.")
         elif value < self.min_value or value > self.max_value:
             raise ValueError(
